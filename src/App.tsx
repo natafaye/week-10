@@ -1,45 +1,30 @@
-import Button from "./Button";
+import { useState } from "react"
+import { TEST_DATA } from "./myData"
+import Sidebar from "./Sidebar"
+import Button from "./Button"
 
-const myData = [
-  {
-    id: 0,
-    username: "nata",
-    fullName: "Natalie Childs",
-    role: "Instructor"
-  },
-  {
-    id: 1,
-    username: "juan",
-    fullName: "Juan",
-    role: "Student"
-  },
-  {
-    id: 2,
-    username: "tyler",
-    fullName: "Tyler",
-    role: "Student"
-  },
-]
-
-// const myDataDivs = [
-//   <div>nata</div>,
-//   <div>juan</div>,
-//   <div>tyler</div>
-// ]
 
 export default function App() {
+  const [contactList, setContactList] = useState(TEST_DATA)
+  // DO NOT: store the actual selected contact because that would duplicate it
+  // DO: store the id or index of the selected contact so that we have no duplication
+  const [selectedContactId, setSelectedContactId] = useState(0)
+
+  const selectedContact = contactList.find(contact => contact.id === selectedContactId)
+
+  const deleteContact = (idToDelete: number | undefined) => {
+    setContactList(contactList.filter(item => item.id !== idToDelete))
+  }
+
   return (
-    <div>
-      { myData.map((x) => (
-        <div key={x.id} className="mx-auto flex max-w-sm items-center gap-x-4 rounded-xl bg-white p-4 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
-          <h2 className="text-xl font-medium text-black dark:text-white">{x.fullName}</h2>
-          <p className="text-gray-500 dark:text-gray-400">{x.username}</p>
-        </div>
-      )) }
-      {/* <div>nata</div>
-      <div>juan</div>
-      <div>tyler</div> */}
-      <Button />
+    <div className="text-white p-4 flex">
+      <Sidebar contacts={contactList} onContactSelect={setSelectedContactId} selectedContactId={selectedContactId} />
+      <div className="grow">
+        <h1 className="text-4xl font-bold">{selectedContact?.fullName}</h1>
+        <hr className="my-3" />
+        <p className="mb-4">Role: {selectedContact?.role}</p>
+        <Button text="Delete" onClick={() => deleteContact(selectedContact?.id)}/>
+      </div>
     </div>
   )
 }
@@ -72,6 +57,9 @@ export default function App() {
 // 5) Make a second component and use it
 // 6) Style everything with a little bit of Tailwind (don't be afraid to copy from the docs and then tweak)
 
+// 7) Put the array of objects in state
+// 8) Pick one more thing to put in state (sidebar open/closed, selected something, count of something)
+// 9) Use props to pass things down from parent components to children components
 
 // Best Way To Learn
 // Write code until you're stuck

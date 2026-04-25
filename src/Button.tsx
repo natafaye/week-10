@@ -1,6 +1,8 @@
-export default function Button() {
-    return <button className="bg-cyan-500 rounded-full p-3 text-white">Click Me</button>
+type Props = {
+    text: string
+    onClick: () => void
 }
 
-// Export
-// Use it like HTML with <>
+export default function Button({ text, onClick }: Props) {
+    return <button onClick={onClick} className="bg-cyan-500 rounded-full p-3 text-white">{ text }</button>
+}

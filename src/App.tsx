@@ -61,6 +61,12 @@ export default function App() {
 // 8) Pick one more thing to put in state (sidebar open/closed, selected something, count of something)
 // 9) Use props to pass things down from parent components to children components
 
+// 10) Add ability to delete items from array
+// 11) Add a form for creating a new item in the array
+// 12) Add some kind of update (a form if you're feeling brave, or a button if you're not)
+
+// 13) Connect to a backend
+
 // Best Way To Learn
 // Write code until you're stuck
 // Find an example on the internet and copy a small piece
